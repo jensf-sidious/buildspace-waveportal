@@ -1,0 +1,15 @@
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.4;
+contract WavePortal {
+  uint256 totalWaves;
+
+  constructor() {}
+
+  function wave() public {
+    totalWaves += 1;
+  }
+
+  function getTotalWaves() public view returns (uint256) {
+    return totalWaves;
+  }
+}
