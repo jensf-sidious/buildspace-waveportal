@@ -47,3 +47,7 @@ Thumbs.db
 
 # my stuff
 .env*
+
+# hardhat
+/artifacts
+/cache
