@@ -17,7 +17,8 @@ contract WavePortal {
 
   Wave[] waves;
 
-  constructor() {}
+  // payable: can send ether to users
+  constructor() payable {}
 
   function wave(string memory _message) public {
     totalWaves += 1;
@@ -26,6 +27,18 @@ contract WavePortal {
     waves.push(Wave(msg.sender, _message, block.timestamp));
 
     emit newWave(msg.sender, block.timestamp, _message);
+
+    // solidity knows the keyword ether.
+    uint256 prizeAmount = 0.0001 ether;
+    // Check that the prizeAmount is less than the contract's balance
+    require(
+      prizeAmount <= address(this).balance,
+      "Trying to withdraw more money than the contract has."
+    );
+    // Magic line to send money :P
+    // Syntax is a little weird
+    (bool success, ) = (msg.sender).call{value: prizeAmount}("");
+    require(success, "Failed to withdraw monety from contract.");
   }
 
   function getAllWaves() public view returns (Wave[] memory) {
