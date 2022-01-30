@@ -43,6 +43,9 @@ const main = async () => {
     hre.ethers.utils.formatEther(contractBalance)
   );
 
+  waveTxn = await waveContract.wave("A noice wave");
+  await waveTxn.wait();
+
   waveCount = await waveContract.getTotalWaves();
 
   let allWaves = await waveContract.getAllWaves();
